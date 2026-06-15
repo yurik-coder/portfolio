@@ -121,6 +121,25 @@ body.is-fixed{overflow:hidden}
   object-fit: contain;
 }
 
+.skill-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin:24px 0 48px;
+}
+
+.skill-chip{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 14px;
+  border-radius:999px;
+  background:var(--bg-2);
+  color:var(--accent);
+  font-size:.75rem;
+  font-weight:500;
+  line-height:1;
+}
+  
 /* 強み見出し・3カラムボックス配置 */
 .strengths__title{font-size:.92rem;font-weight:700;color:var(--ink-light);letter-spacing:.05em;margin:36px 0 14px}
 .strengths-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
@@ -333,8 +352,16 @@ body.is-fixed{overflow:hidden}
       </div>
       
       <div class="about__img">
-        <img src="profile_image.png" alt="田中由里のイメージイラスト">
+        <img src="profile_image.png" alt="風間友里のイメージイラスト">
       </div>
+    </div>
+    <div class="skill-chips">
+      <span class="skill-chip">コンテンツ企画・編集</span>
+      <span class="skill-chip">Webディレクション</span>
+      <span class="skill-chip">制作進行管理</span>
+      <span class="skill-chip">CMS運用</span>
+      <span class="skill-chip">GA4分析</span>
+      <span class="skill-chip">コンテンツ改善提案</span>
     </div>
 
     <h3 class="strengths__title">私の強み</h3>
