@@ -249,6 +249,8 @@ body.is-fixed{overflow:hidden}
 .vision-card__label{font-family:var(--font-ui);font-size:.88rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--accent-warm);margin-bottom:6px}
 .vision-card__text{font-size:.81rem;color:var(--ink-light);line-height:1.9}
+  .jisaku-grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){.jisaku-grid{grid-template-columns:1fr 1fr}}
 
 /* ── CONTACT ── */
 .contact-section{background:var(--ink);color:var(--white);padding:60px var(--pad)}
@@ -600,7 +602,7 @@ body.is-fixed{overflow:hidden}
 
       <div class="works__block">
               <h3 class="works__category-title">自主制作</h3>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div class="jisaku-grid">
             
                 <div class="work-card" data-lb-trigger>
                   <div class="work-card__img">
