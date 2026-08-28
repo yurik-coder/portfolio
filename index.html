@@ -1,933 +1,2126 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MY PORTFOLIO — Yuri Kazma</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-ul,ol{list-style:none}
-a{color:inherit;text-decoration:none}
-img,video{display:block;max-width:100%}
-button{font:inherit;border:none;background:none;cursor:pointer}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MY PORTFOLIO — Yuri Kazama</title>
+  <!-- ファビコン！ -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
 
-:root {
-  --ink:#1e1c1a;
-  --ink-light:#4a4540;
-  --ink-muted:#8a8278;
-  --bg:#faf8f5;
-  --bg-2:#f2ede6;
-  --bg-3:#e4ddd4;
-  --accent:#6b5c4e;
-  --accent-warm:#a07850;
-  --accent-pale:#e8ddd0;
-  --white:#ffffff;
-  --font-display:'Cormorant Garamond',serif;
-  --font-body:'Noto Sans JP',sans-serif;
-  --font-ui:'DM Sans',sans-serif;
-  --max-w:920px;
-  --pad:clamp(20px,5vw,48px);
-  --radius:8px;
-}
+    ul,
+    ol {
+      list-style: none
+    }
 
-html{scroll-behavior:smooth}
-body{font-family:var(--font-body);font-weight:400;color:var(--ink);
-  background:var(--bg);line-height:1.8;-webkit-font-smoothing:antialiased}
-body.is-fixed{overflow:hidden}
+    a {
+      color: inherit;
+      text-decoration: none
+    }
 
-/* ── HEADER ── */
-.header{position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:0 var(--pad);transition:background .4s,box-shadow .4s}
-.header.is-scrolled{background:rgba(250,248,245,.96);backdrop-filter:blur(12px);
-  box-shadow:0 1px 0 var(--bg-3)}
-.header__inner{display:flex;align-items:center;justify-content:space-between;
-  height:52px;max-width:var(--max-w);margin:0 auto}
-@media(min-width:768px){.header__inner{height:64px}}
-.header__logo{font-family:var(--font-display);font-size:1.1rem;letter-spacing:.1em;
-  color:var(--ink);transition:color .4s;cursor:pointer}
-.nav__list{display:none}
-@media(min-width:768px){.nav__list{display:flex;gap:1.8rem}}
-.nav__link{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--ink-muted);transition:color .3s}
-.nav__link:hover{color:var(--ink)}
-.menu-btn{display:flex;flex-direction:column;justify-content:center;gap:5px;width:28px;height:28px}
-.menu-btn__bar{display:block;width:100%;height:1.5px;background:var(--ink);
-  border-radius:2px;transition:transform .4s,opacity .3s}
-.menu-btn.is-checked .menu-btn__bar:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.menu-btn.is-checked .menu-btn__bar:nth-child(2){opacity:0}
-.menu-btn.is-checked .menu-btn__bar:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-@media(min-width:768px){.menu-btn{display:none}}
+    img,
+    video {
+      display: block;
+      max-width: 100%
+    }
 
-/* ── DRAWER ── */
-.drawer{position:fixed;inset:0;background:rgba(30,28,26,.97);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;z-index:90}
-.drawer.is-open{opacity:1;visibility:visible}
-.drawer__list{text-align:center}
-.drawer__item{margin-bottom:2.2rem}
-.drawer__link{font-family:var(--font-display);font-size:1.8rem;letter-spacing:.12em;color:var(--white)}
-.drawer__link:hover{opacity:.6}
+    button {
+      font: inherit;
+      border: none;
+      background: none;
+      cursor: pointer
+    }
 
-/* ── HERO ── */
-.hero{position:relative;height:65vh;min-height:400px;max-height:580px;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;text-align:center}
-.hero__bg{position:absolute;inset:0;z-index:0}
-.hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center}
-.hero__overlay{position:absolute;inset:0;z-index:1;
-  background:linear-gradient(180deg, rgba(30,28,26,.2) 0%, rgba(30,28,26,.6) 100%)}
-.hero__content{position:relative;z-index:2;width:100%;max-width:var(--max-w);
-  padding:0 var(--pad);display:flex;flex-direction:column;align-items:center;gap:8px}
-.hero__title{font-family:var(--font-display);font-size:clamp(2.4rem, 7vw, 4rem);
-  font-weight:400;letter-spacing:.08em;color:var(--white);line-height:1.1;
-  opacity:0;animation:fadeUp .7s .2s ease forwards}
-.hero__statement{font-size:clamp(0.95rem, 2.5vw, 1.2rem);font-weight:300;letter-spacing:.2em;
-  color:rgba(255,255,255,0.95);margin:12px 0 4px;font-family:var(--font-body);
-  opacity:0;animation:fadeUp .7s .4s ease forwards}
-.hero__name{font-family:var(--font-display);font-size:clamp(1.2rem, 3.2vw, 1.8rem);
-  font-weight:400;letter-spacing:.1em;color:rgba(255,255,255,0.8);
-  opacity:0;animation:fadeUp .7s .5s ease forwards}
-.hero__label{font-family:var(--font-ui);font-size:.68rem;letter-spacing:.22em;
-  text-transform:uppercase;color:rgba(255, 255, 255, 0.684);
-  opacity:0;animation:fadeUp .7s .6s ease forwards}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    :root {
+      --ink: #1e1c1a;
+      --ink-light: #4a4540;
+      --ink-muted: #8a8278;
+      --bg: #faf8f5;
+      --bg-2: #f2ede6;
+      --bg-3: #e4ddd4;
+      --accent: #6b5c4e;
+      --accent-warm: #a07850;
+      --accent-pale: #e8ddd0;
+      --white: #ffffff;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Noto Sans JP', sans-serif;
+      --font-ui: 'DM Sans', sans-serif;
+      --max-w: 920px;
+      --pad: clamp(20px, 5vw, 48px);
+      --radius: 8px;
+    }
 
-/* ── MAIN ── */
-.main{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad)}
-.section{padding:54px 0}
-@media(min-width:768px){.section{padding:76px 0}}
+    html {
+      scroll-behavior: smooth
+    }
 
-.section__eyebrow{font-family:var(--font-ui);font-size:.66rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--accent-warm);margin-bottom:6px;
-  display:flex;align-items:center;gap:8px}
-.section__eyebrow::after{content:'';flex:1;height:1px;background:var(--accent-pale);max-width:48px}
-.section__title{font-family:var(--font-display);font-size:clamp(1.6rem,4vw,2.2rem);
-  font-weight:400;letter-spacing:.05em;margin-bottom:32px;line-height:1.2}
-.section__divider{border:none;border-top:1px solid var(--bg-3);margin:0}
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased
+    }
 
-/* ── ABOUT ── */
-.about__layout{display:grid;grid-template-columns:1fr;gap:32px;margin-bottom:20px}
-@media(min-width:640px){.about__layout{grid-template-columns:1fr 240px;gap:40px;align-items:start}}
-.about__name{font-family:var(--font-display);font-size:1.1rem;letter-spacing:.06em;
-  color:var(--ink-muted);margin-bottom:12px}
-.about__intro{font-size:.875rem;line-height:2.1;color:var(--ink-light);padding-left:14px;border-left:2px solid var(--accent-pale)}
-.about__img{width:50%;max-width:160px;aspect-ratio:1/1;margin:20px auto 0;display:flex;align-items:center;justify-content:center}
-@media(min-width:640px){.about__img{width:100%;max-width:180px;margin-top:24px}}
-.about__img img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+    body.is-fixed {
+      overflow: hidden
+    }
 
-.skill-chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin:24px 0 48px;
-}
+    /* ── HEADER ── */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 var(--pad);
+      transition: background .4s, box-shadow .4s
+    }
 
-.skill-chip{
-  display:inline-flex;
-  align-items:center;
-  padding:8px 14px;
-  border-radius:999px;
-  background:var(--bg-2);
-  color:var(--accent);
-  font-size:.75rem;
-  font-weight:500;
-  line-height:1;
-}
-  
-/* 強み見出し・3カラムボックス配置 */
-.strengths__title{font-size:.92rem;font-weight:700;color:var(--ink-light);letter-spacing:.05em;margin:36px 0 14px}
-.strengths-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
-@media(min-width:768px){.strengths-grid{grid-template-columns:repeat(3,1fr);gap:20px}}
-.strength-card{background:var(--white);border:1px solid var(--bg-3);
-  border-radius:var(--radius);padding:20px 22px;display:flex;flex-direction:column;gap:10px}
-.strength-card__head{display:flex;align-items:center;gap:10px}
-.strength-card__icon{width:30px;height:30px;border-radius:50%;background:var(--accent-pale);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.strength-card__icon svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:1.8}
-.strength-card__title{font-size:.88rem;font-weight:700;color:var(--ink)}
-.strength-card__text{font-size:.81rem;color:var(--ink-light);line-height:1.85}
+    .header.is-scrolled {
+      background: rgba(250, 248, 245, .96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--bg-3)
+    }
 
-/* ── WORKS ── */
-.works__block{margin-bottom:48px}
-.works__block:last-child{margin-bottom:16px}
-.works__category-title{font-size:.92rem;font-weight:700;color:var(--ink-light);
-  letter-spacing:.05em;margin-bottom:14px}
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      max-width: var(--max-w);
+      margin: 0 auto
+    }
 
-/* Slider */
-.slider-wrap{overflow:hidden;border-radius:var(--radius)}
-.slider-track{display:flex;transition:transform .45s cubic-bezier(.4,0,.2,1)}
-.slider-slide{flex-shrink:0;width:100%;padding:4px}
-@media(min-width:640px){.slider-slide{width:50%}}
-.slider-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px}
-.slider-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--bg-3);
-  display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
-.slider-btn:hover:not(:disabled){background:var(--accent-pale);border-color:var(--accent-pale)}
-.slider-btn:disabled{opacity:.3;cursor:default}
-.slider-btn svg{width:13px;height:13px;stroke:var(--ink);fill:none;stroke-width:2}
-.slider-dots{display:flex;gap:6px}
-.slider-dot{width:6px;height:6px;border-radius:50%;background:var(--bg-3);
-  cursor:pointer;transition:background .3s,transform .3s}
-.slider-dot.is-active{background:var(--accent-warm);transform:scale(1.3)}
+    @media(min-width:768px) {
+      .header__inner {
+        height: 64px
+      }
+    }
 
-/* Work card */
-.work-card{background:var(--white);border-radius:var(--radius);overflow:hidden;
-  border:1px solid var(--bg-3)}
-.work-card__img{position:relative;aspect-ratio:16/9;overflow:hidden;
-  background:var(--bg-2);cursor:zoom-in}
-.work-card__img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.work-card__img:hover img{transform:scale(1.04)}
-.work-card__placeholder{width:100%;height:100%;display:flex;align-items:center;
-  justify-content:center;font-size:.7rem;color:var(--ink-muted);
-  font-family:var(--font-ui);text-align:center;padding:12px;pointer-events:none}
-.work-card__zoom{position:absolute;bottom:8px;right:8px;
-  width:26px;height:26px;border-radius:4px;
-  background:rgba(30,28,26,.55);display:flex;align-items:center;justify-content:center;
-  pointer-events:none}
-.work-card__zoom svg{width:12px;height:12px;stroke:white;fill:none;stroke-width:2}
-.work-card__body{padding:14px 16px}
-.work-card__title{font-size:.88rem;font-weight:700;margin-bottom:6px}
-.work-card__meta{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
-.work-card__tag{font-family:var(--font-ui);font-size:.65rem;padding:2px 8px;
-  background:var(--bg-2);border-radius:100px;color:var(--ink-light)}
-.work-card__desc{font-size:.78rem;color:var(--ink-light);line-height:1.85}
-.work-card__link{display:inline-flex;align-items:center;gap:4px;margin-top:8px;
-  font-family:var(--font-ui);font-size:.72rem;color:var(--accent-warm);
-  border-bottom:1px solid var(--accent-pale);padding-bottom:1px;transition:border-color .3s}
-.work-card__link:hover{border-color:var(--accent-warm)}
-.work-card__link svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2}
+    .header__logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: .1em;
+      color: var(--ink);
+      transition: color .4s;
+      cursor: pointer
+    }
 
-/* ── LEARNING ── */
-.learning-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
-@media(min-width:600px){.learning-grid{grid-template-columns:repeat(4,1fr)}}
-.learning-card{background:var(--white);border:1px solid var(--bg-3);border-radius:var(--radius);
-  padding:16px;text-align:center}
-.learning-card__icon{width:34px;height:34px;border-radius:50%;background:var(--accent-pale);
-  display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.learning-card__icon svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:1.8}
-.learning-card__title{font-size:.75rem;font-weight:700;margin-bottom:3px}
-.learning-card__text{font-size:.67rem;color:var(--ink-muted);line-height:1.7}
+    .nav__list {
+      display: none
+    }
 
-.tools-label,.certs-label,.sw-label{font-size:.8rem;font-weight:700;margin-bottom:12px;color:var(--ink)}
-.tools-label{margin-top:24px}
-.tools-grid{display:flex;flex-wrap:wrap;gap:8px}
-.tool-chip{display:flex;align-items:center;gap:7px;
-  background:var(--white);border:1px solid var(--bg-3);border-radius:6px;
-  padding:6px 13px;font-family:var(--font-ui);font-size:.74rem;color:var(--ink-light)}
-.tool-chip svg{width:15px;height:15px;flex-shrink:0}
+    @media(min-width:768px) {
+      .nav__list {
+        display: flex;
+        gap: 1.8rem
+      }
+    }
 
-.certs-label{margin-top:20px}
-.certs-list{display:flex;flex-wrap:wrap;gap:8px}
-.cert{font-family:var(--font-ui);font-size:.72rem;padding:5px 14px;
-  border-radius:100px;background:var(--accent-pale);color:var(--accent)}
+    .nav__link {
+      font-family: var(--font-ui);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      transition: color .3s
+    }
 
-/* 訓練校制作物 */
-.sw-label{margin-top:24px}
-.sw-grid{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:640px){.sw-grid{grid-template-columns:1fr 1fr;gap:16px}}
-.sw-item{background:var(--white);border:1px solid var(--bg-3);border-radius:var(--radius);
-  overflow:hidden;cursor:zoom-in}
-.sw-item__img{aspect-ratio:16/9;background:var(--bg-2);overflow:hidden;position:relative}
-.sw-item__img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.sw-item:hover .sw-item__img img{transform:scale(1.04)}
-.sw-item__placeholder{width:100%;height:100%;display:flex;align-items:center;
-  justify-content:center;font-size:.65rem;color:var(--ink-muted);text-align:center;padding:8px}
-.sw-item__body{padding:12px 14px}
-.sw-item__cap{font-size:.78rem;font-weight:700;color:var(--ink);margin-bottom:4px}
-.sw-item__desc{font-size:.78rem;color:var(--ink-light);line-height:1.7}
+    .nav__link:hover {
+      color: var(--ink)
+    }
 
-/* ── VISION ── */
-.vision-cards{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:640px){.vision-cards{grid-template-columns:1fr 1fr;gap:20px}}
-.vision-card{background:var(--white);border:1px solid var(--bg-3);border-radius:var(--radius);
-  padding:20px 22px;border-left:3px solid var(--accent-pale)}
-.vision-card__label{font-family:var(--font-ui);font-size:.88rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--accent-warm);margin-bottom:6px}
-.vision-card__text{font-size:.81rem;color:var(--ink-light);line-height:1.9}
-  .jisaku-grid{display:grid;grid-template-columns:1fr;gap:20px}
-@media(min-width:640px){.jisaku-grid{grid-template-columns:1fr 1fr}}
+    .menu-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px
+    }
 
-/* ── CONTACT ── */
-.contact-section{background:var(--ink);color:var(--white);padding:60px var(--pad)}
-.contact-inner{max-width:var(--max-w);margin:0 auto}
-.contact-title{font-family:var(--font-display);font-size:clamp(1.8rem,5vw,2.6rem);
-  font-weight:400;letter-spacing:.08em;margin-bottom:6px}
-.contact-sub{font-size:.84rem;color:rgba(255,255,255,.75);
-  letter-spacing:.1em;margin-bottom:32px}
-.contact-row{display:flex;flex-direction:column;gap:16px}
-@media(min-width:600px){.contact-row{flex-direction:row;flex-wrap:wrap;gap:32px;align-items:center}}
-.contact-item{display:flex;align-items:center;gap:10px;
-  font-family:var(--font-ui);font-size:.88rem;color:rgba(255,255,255,.85)}
-.contact-item svg{width:16px;height:16px;stroke:rgba(255,255,255,.55);fill:none;stroke-width:1.5;flex-shrink:0}
-.contact-item__copy{background:none;border:1px solid rgba(255,255,255,.35);
-  border-radius:4px;color:rgba(255,255,255,.7);font-size:.68rem;
-  padding:3px 10px;margin-left:8px;cursor:pointer;transition:all .3s}
-.contact-item__copy:hover{background:var(--accent-pale);border-color:var(--accent-pale);color:var(--ink)}
+    .menu-btn__bar {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform .4s, opacity .3s
+    }
 
-.footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);
-  padding:14px var(--pad);text-align:center}
-.footer small{font-family:var(--font-ui);font-size:.62rem;color:rgba(255, 255, 255, 0.512);letter-spacing:.1em}
+    .menu-btn.is-checked .menu-btn__bar:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg)
+    }
 
-/* ── LIGHTBOX ── */
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:500;
-  display:flex;align-items:center;justify-content:center;padding:20px;
-  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;cursor:zoom-out}
-.lightbox.is-open{opacity:1;visibility:visible}
-.lightbox__img{max-width:75%;max-height:65vh;border-radius:4px;
-  transform:scale(.96);transition:transform .3s;cursor:default}
-.lightbox.is-open .lightbox__img{transform:scale(1)}
-.lightbox__close{position:absolute;top:16px;right:16px;width:38px;height:38px;
-  border-radius:50%;background:rgba(255,255,255,.12);color:white;font-size:1.1rem;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .3s}
-.lightbox__close:hover{background:rgba(255,255,255,.22)}
+    .menu-btn.is-checked .menu-btn__bar:nth-child(2) {
+      opacity: 0
+    }
 
-/* Toast */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);
-  padding:9px 22px;background:var(--ink);color:var(--white);font-size:.78rem;
-  border-radius:100px;opacity:0;visibility:hidden;pointer-events:none;
-  transition:opacity .3s,transform .3s,visibility .3s;z-index:600;white-space:nowrap}
-.toast.is-show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+    .menu-btn.is-checked .menu-btn__bar:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg)
+    }
 
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-</style>
+    @media(min-width:768px) {
+      .menu-btn {
+        display: none
+      }
+    }
+
+    /* ── DRAWER ── */
+    .drawer {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 28, 26, .97);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .4s, visibility .4s;
+      z-index: 90
+    }
+
+    .drawer.is-open {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .drawer__list {
+      text-align: center
+    }
+
+    .drawer__item {
+      margin-bottom: 2.2rem
+    }
+
+    .drawer__link {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      letter-spacing: .12em;
+      color: var(--white)
+    }
+
+    .drawer__link:hover {
+      opacity: .6
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 65vh;
+      min-height: 400px;
+      max-height: 580px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0
+    }
+
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(30, 28, 26, .2) 0%, rgba(30, 28, 26, .6) 100%)
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--max-w);
+      padding: 0 var(--pad);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 400;
+      letter-spacing: .08em;
+      color: var(--white);
+      line-height: 1.1;
+      opacity: 0;
+      animation: fadeUp .7s .2s ease forwards
+    }
+
+    .hero__statement {
+      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+      font-weight: 300;
+      letter-spacing: .2em;
+      color: rgba(255, 255, 255, 0.95);
+      margin: 12px 0 4px;
+      font-family: var(--font-body);
+      opacity: 0;
+      animation: fadeUp .7s .4s ease forwards
+    }
+
+    .hero__name {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3.2vw, 1.8rem);
+      font-weight: 400;
+      letter-spacing: .1em;
+      color: rgba(255, 255, 255, 0.8);
+      opacity: 0;
+      animation: fadeUp .7s .5s ease forwards
+    }
+
+    .hero__label {
+      font-family: var(--font-ui);
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.684);
+      opacity: 0;
+      animation: fadeUp .7s .6s ease forwards
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad)
+    }
+
+    .section {
+      padding: 54px 0
+    }
+
+    @media(min-width:768px) {
+      .section {
+        padding: 76px 0
+      }
+    }
+
+    .section__eyebrow {
+      font-family: var(--font-ui);
+      font-size: .66rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .section__eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--accent-pale);
+      max-width: 48px
+    }
+
+    .section__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 400;
+      letter-spacing: .05em;
+      margin-bottom: 32px;
+      line-height: 1.2
+    }
+
+    .section__divider {
+      border: none;
+      border-top: 1px solid var(--bg-3);
+      margin: 0
+    }
+
+    /* ── ABOUT ── */
+    .about__layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 20px
+    }
+
+    @media(min-width:640px) {
+      .about__layout {
+        grid-template-columns: 1fr 240px;
+        gap: 40px;
+        align-items: start
+      }
+    }
+
+    .about__name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: .06em;
+      color: var(--ink-muted);
+      margin-bottom: 12px
+    }
+
+    .about__intro {
+      font-size: .875rem;
+      line-height: 2.1;
+      color: var(--ink-light);
+      padding-left: 14px;
+      border-left: 2px solid var(--accent-pale)
+    }
+
+    .about__img {
+      width: 50%;
+      max-width: 160px;
+      aspect-ratio: 1/1;
+      margin: 20px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    @media(min-width:640px) {
+      .about__img {
+        width: 100%;
+        max-width: 180px;
+        margin-top: 24px
+      }
+    }
+
+    .about__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0 40px;
+    }
+
+    .skill-chip {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #efe8de;
+      color: #6f6457;
+      font-size: .75rem;
+      line-height: 1;
+    }
+
+    .strengths__title {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--ink-light);
+      letter-spacing: .05em;
+      margin: 36px 0 14px
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 16px
+    }
+
+    @media(min-width:768px) {
+      .strengths-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px
+      }
+    }
+
+    .strength-card {
+      background: var(--white);
+      border: 1px solid var(--bg-3);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .strength-card__head {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .strength-card__icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .strength-card__icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.8
+    }
+
+    .strength-card__title {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--ink)
+    }
+
+    .strength-card__text {
+      font-size: .81rem;
+      color: var(--ink-light);
+      line-height: 1.85
+    }
+
+    /* ── WORKS ── */
+    .works__block {
+      margin-bottom: 48px
+    }
+
+    .works__block:last-child {
+      margin-bottom: 16px
+    }
+
+    .works__category-title {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--ink-light);
+      letter-spacing: .05em;
+      margin-bottom: 14px
+    }
+
+    /* Slider (2 cards per view) */
+    .slider-wrap {
+      overflow: hidden;
+      border-radius: var(--radius)
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform .45s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .slider-slide {
+      flex-shrink: 0;
+      width: 100%;
+      padding: 4px
+    }
+
+    @media(min-width:640px) {
+      .slider-slide {
+        width: 50%
+      }
+    }
+
+    /* 自主制作専用：1スライドが横幅100%（左右統合カードを内包） */
+    .slider-slide--full {
+      width: 100% !important;
+      padding: 4px
+    }
+
+    /* ── 自主制作（1つの大きな枠・左右結合カード） ── */
+    .personal-card {
+      background: var(--white);
+      border: 1px solid var(--bg-3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media(min-width:768px) {
+      .personal-card {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .personal-card__left {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--bg-2);
+    }
+
+    @media(min-width:768px) {
+      .personal-card__left {
+        border-bottom: none;
+        border-right: 1px solid var(--bg-2);
+      }
+    }
+
+    .personal-card__img {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--bg-2);
+      cursor: zoom-in;
+    }
+
+    .personal-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s;
+    }
+
+    .personal-card:hover .personal-card__img img {
+      transform: scale(1.03);
+    }
+
+    .personal-card__zoom {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      background: rgba(30, 28, 26, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .personal-card__zoom svg {
+      width: 12px;
+      height: 12px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .personal-card__summary {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .personal-card__title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .personal-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 2px 0 6px;
+    }
+
+    .personal-card__desc {
+      font-size: .78rem;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .personal-card__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .personal-card__right {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .personal-card__section-title {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+      padding-bottom: 2px;
+      border-bottom: none;
+    }
+
+    .personal-card__sub-title {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--accent-warm);
+      margin-top: 12px;
+      margin-bottom: 3px;
+    }
+
+    .personal-card__sub-title:first-of-type {
+      margin-top: 0;
+    }
+
+    .slider-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px
+    }
+
+    .slider-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--bg-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .3s, border-color .3s
+    }
+
+    .slider-btn:hover:not(:disabled) {
+      background: var(--accent-pale);
+      border-color: var(--accent-pale)
+    }
+
+    .slider-btn:disabled {
+      opacity: .3;
+      cursor: default
+    }
+
+    .slider-btn svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--ink);
+      fill: none;
+      stroke-width: 2
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 6px
+    }
+
+    .slider-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--bg-3);
+      cursor: pointer;
+      transition: background .3s, transform .3s
+    }
+
+    .slider-dot.is-active {
+      background: var(--accent-warm);
+      transform: scale(1.3)
+    }
+
+    /* Work card */
+    .work-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--bg-3)
+    }
+
+    .work-card__img {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--bg-2);
+      cursor: zoom-in
+    }
+
+    .work-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s
+    }
+
+    .work-card__img:hover img {
+      transform: scale(1.04)
+    }
+
+    .work-card__zoom {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      background: rgba(30, 28, 26, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none
+    }
+
+    .work-card__zoom svg {
+      width: 12px;
+      height: 12px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2
+    }
+
+    .work-card__body {
+      padding: 14px 16px
+    }
+
+    .work-card__title {
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 6px
+    }
+
+    .work-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 8px
+    }
+
+    .work-card__tag {
+      font-family: var(--font-ui);
+      font-size: .65rem;
+      padding: 2px 8px;
+      background: var(--bg-2);
+      border-radius: 100px;
+      color: var(--ink-light)
+    }
+
+    .work-card__desc {
+      font-size: .78rem;
+      color: var(--ink-light);
+      line-height: 1.85
+    }
+
+    .work-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-family: var(--font-ui);
+      font-size: .72rem;
+      color: var(--accent-warm);
+      border-bottom: 1px solid var(--accent-pale);
+      padding-bottom: 1px;
+      transition: border-color .3s
+    }
+
+    .work-card__link:hover {
+      border-color: var(--accent-warm)
+    }
+
+    .work-card__link svg {
+      width: 10px;
+      height: 10px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2
+    }
+
+    /* ── LEARNING ── */
+    .learning-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px
+    }
+
+    @media(min-width:600px) {
+      .learning-grid {
+        grid-template-columns: repeat(4, 1fr)
+      }
+    }
+
+    .learning-card {
+      background: var(--white);
+      border: 1px solid var(--bg-3);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center
+    }
+
+    .learning-card__icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px
+    }
+
+    .learning-card__icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.8
+    }
+
+    .learning-card__title {
+      font-size: .75rem;
+      font-weight: 700;
+      margin-bottom: 3px
+    }
+
+    .learning-card__text {
+      font-size: .67rem;
+      color: var(--ink-muted);
+      line-height: 1.7
+    }
+
+    .tools-label,
+    .certs-label,
+    .sw-label {
+      font-size: .8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--ink)
+    }
+
+    .tools-label {
+      margin-top: 24px
+    }
+
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .tool-chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--white);
+      border: 1px solid var(--bg-3);
+      border-radius: 6px;
+      padding: 6px 13px;
+      font-family: var(--font-ui);
+      font-size: .74rem;
+      color: var(--ink-light)
+    }
+
+    .tool-chip svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0
+    }
+
+    .certs-label {
+      margin-top: 20px
+    }
+
+    .certs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .cert {
+      font-family: var(--font-ui);
+      font-size: .72rem;
+      padding: 5px 14px;
+      border-radius: 100px;
+      background: var(--accent-pale);
+      color: var(--accent)
+    }
+
+    /* 訓練校制作物 */
+    .sw-label {
+      margin-top: 24px
+    }
+
+    .sw-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px
+    }
+
+    @media(min-width:640px) {
+      .sw-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px
+      }
+    }
+
+    .sw-item {
+      background: var(--white);
+      border: 1px solid var(--bg-3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: zoom-in
+    }
+
+    .sw-item__img {
+      aspect-ratio: 16/9;
+      background: var(--bg-2);
+      overflow: hidden;
+      position: relative
+    }
+
+    .sw-item__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s
+    }
+
+    .sw-item:hover .sw-item__img img {
+      transform: scale(1.04)
+    }
+
+    .sw-item__body {
+      padding: 12px 14px
+    }
+
+    .sw-item__cap {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px
+    }
+
+    .sw-item__desc {
+      font-size: .78rem;
+      color: var(--ink-light);
+      line-height: 1.7
+    }
+
+    /* ── VISION ── */
+    .vision-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px
+    }
+
+    @media(min-width:640px) {
+      .vision-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px
+      }
+    }
+
+    .vision-card {
+      background: var(--white);
+      border: 1px solid var(--bg-3);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      border-left: 3px solid var(--accent-pale)
+    }
+
+    .vision-card__label {
+      font-family: var(--font-ui);
+      font-size: .88rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 6px
+    }
+
+    .vision-card__text {
+      font-size: .81rem;
+      color: var(--ink-light);
+      line-height: 1.9
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--ink);
+      color: var(--white);
+      padding: 60px var(--pad)
+    }
+
+    .contact-inner {
+      max-width: var(--max-w);
+      margin: 0 auto
+    }
+
+    .contact-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 400;
+      letter-spacing: .08em;
+      margin-bottom: 6px
+    }
+
+    .contact-sub {
+      font-size: .84rem;
+      color: rgba(255, 255, 255, .75);
+      letter-spacing: .1em;
+      margin-bottom: 32px
+    }
+
+    .contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    @media(min-width:600px) {
+      .contact-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 32px;
+        align-items: center
+      }
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-ui);
+      font-size: .88rem;
+      color: rgba(255, 255, 255, .85)
+    }
+
+    .contact-item svg {
+      width: 16px;
+      height: 16px;
+      stroke: rgba(255, 255, 255, .55);
+      fill: none;
+      stroke-width: 1.5;
+      flex-shrink: 0
+    }
+
+    .contact-item__copy {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: 4px;
+      color: rgba(255, 255, 255, .7);
+      font-size: .68rem;
+      padding: 3px 10px;
+      margin-left: 8px;
+      cursor: pointer;
+      transition: all .3s
+    }
+
+    .contact-item__copy:hover {
+      background: var(--accent-pale);
+      border-color: var(--accent-pale);
+      color: var(--ink)
+    }
+
+    .footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      padding: 14px var(--pad);
+      text-align: center
+    }
+
+    .footer small {
+      font-family: var(--font-ui);
+      font-size: .62rem;
+      color: rgba(255, 255, 255, 0.512);
+      letter-spacing: .1em
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .9);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .3s, visibility .3s;
+      cursor: zoom-out
+    }
+
+    .lightbox.is-open {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .lightbox__img {
+      max-width: 85%;
+      max-height: 75vh;
+      border-radius: 4px;
+      transform: scale(.96);
+      transition: transform .3s;
+      cursor: default
+    }
+
+    .lightbox.is-open .lightbox__img {
+      transform: scale(1)
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .12);
+      color: white;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .3s
+    }
+
+    .lightbox__close:hover {
+      background: rgba(255, 255, 255, .22)
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      padding: 9px 22px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: .78rem;
+      border-radius: 100px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .3s, transform .3s, visibility .3s;
+      z-index: 600;
+      white-space: nowrap
+    }
+
+    .toast.is-show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0)
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="header" id="js-header">
-  <div class="header__inner">
-    <div class="header__logo" id="js-logo">MY PORTFOLIO</div>
-    <nav>
-      <ul class="nav__list">
-        <li><a href="#about" class="nav__link js-nav">About</a></li>
-        <li><a href="#works" class="nav__link js-nav">Works</a></li>
-        <li><a href="#learning" class="nav__link js-nav">Learning</a></li>
-        <li><a href="#vision" class="nav__link js-nav">Vision</a></li>
-        <li><a href="#contact" class="nav__link js-nav">Contact</a></li>
-      </ul>
-    </nav>
-    <button class="menu-btn" id="js-menu" aria-label="メニューを開く" aria-expanded="false">
-      <span class="menu-btn__bar"></span>
-      <span class="menu-btn__bar"></span>
-      <span class="menu-btn__bar"></span>
-    </button>
-  </div>
-</header>
-
-<div class="drawer" id="js-drawer">
-  <ul class="drawer__list">
-    <li class="drawer__item"><a href="#about" class="drawer__link js-nav">About</a></li>
-    <li class="drawer__item"><a href="#works" class="drawer__link js-nav">Works</a></li>
-    <li class="drawer__item"><a href="#learning" class="drawer__link js-nav">Learning</a></li>
-    <li class="drawer__item"><a href="#vision" class="drawer__link js-nav">Vision</a></li>
-    <li class="drawer__item"><a href="#contact" class="drawer__link js-nav">Contact</a></li>
-  </ul>
-</div>
-
-<section class="hero">
-  <div class="hero__bg">
-    <img src="portfolio-premium-marble-1.png" alt="">
-  </div>
-  <div class="hero__overlay"></div>
-  <div class="hero__content">
-    <h1 class="hero__title">MY PORTFOLIO</h1>
-    <p class="hero__statement">伝えるだけで終わらせない。成果につながるコンテンツを。</p>
-    <p class="hero__name">Yuri Kazama</p>
-    <p class="hero__label">Web Director &amp; Editor</p>
-  </div>
-</section>
-
-<main class="main">
-
-  <section class="section" id="about">
-    <p class="section__eyebrow">About</p>
-    <h2 class="section__title">自己紹介</h2>
-
-    <div class="about__layout">
-      <div>
-        <p class="about__name">風間 友里（かざま ゆり）</p>
-        <p class="about__intro">紙媒体・Webコンテンツの企画編集から制作進行、ディレクションまで一貫して担当してきました。出版社・IT企業で10年以上にわたり、雑誌・書籍・医療専門誌の編集、広告制作、Webサイト運営に従事。CMS運用やGA4を用いたアクセス解析、新規サイト立ち上げなど幅広い業務を経験しています。現在はWebマーケティングおよびフロントエンド技術を学び、編集領域に加えてデジタル領域の対応力を強化しています。</p>
-      </div>
-      
-      <div class="about__img">
-        <img src="profile_image.png" alt="風間友里のイメージイラスト">
-      </div>
+  <header class="header" id="js-header">
+    <div class="header__inner">
+      <div class="header__logo" id="js-logo">MY PORTFOLIO</div>
+      <nav>
+        <ul class="nav__list">
+          <li><a href="#about" class="nav__link js-nav">About</a></li>
+          <li><a href="#works" class="nav__link js-nav">Works</a></li>
+          <li><a href="#learning" class="nav__link js-nav">Learning</a></li>
+          <li><a href="#vision" class="nav__link js-nav">Vision</a></li>
+          <li><a href="#contact" class="nav__link js-nav">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn" id="js-menu" aria-label="メニューを開く" aria-expanded="false">
+        <span class="menu-btn__bar"></span>
+        <span class="menu-btn__bar"></span>
+        <span class="menu-btn__bar"></span>
+      </button>
     </div>
-    <div class="skill-chips">
-      <span class="skill-chip">コンテンツ企画・編集</span>
-      <span class="skill-chip">Webディレクション</span>
-      <span class="skill-chip">CMS運用</span>
-      <span class="skill-chip">GA4分析</span>
-      <span class="skill-chip">コンテンツ改善提案</span>
+  </header>
+
+  <div class="drawer" id="js-drawer">
+    <ul class="drawer__list">
+      <li class="drawer__item"><a href="#about" class="drawer__link js-nav">About</a></li>
+      <li class="drawer__item"><a href="#works" class="drawer__link js-nav">Works</a></li>
+      <li class="drawer__item"><a href="#learning" class="drawer__link js-nav">Learning</a></li>
+      <li class="drawer__item"><a href="#vision" class="drawer__link js-nav">Vision</a></li>
+      <li class="drawer__item"><a href="#contact" class="drawer__link js-nav">Contact</a></li>
+    </ul>
+  </div>
+
+  <section class="hero">
+    <div class="hero__bg">
+      <img src="portfolio-premium-marble-1.png" alt="">
     </div>
-
-    <h3 class="strengths__title">私の強み</h3>
-
-    <div class="strengths-grid">
-      <div class="strength-card">
-        <div class="strength-card__head">
-          <span class="strength-card__icon">
-            <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-          </span>
-          <span class="strength-card__title">プロジェクト推進力</span>
-        </div>
-        <p class="strength-card__text">常時10本以上の案件を並行管理。クライアント・外注スタッフ双方と連携しながら制作を前進させ、納期遵守と品質維持を両立してきました。複数案件を同時進行する調整力が強みです。</p>
-      </div>
-
-      <div class="strength-card">
-        <div class="strength-card__head">
-          <span class="strength-card__icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </span>
-          <span class="strength-card__title">編集品質への責任感</span>
-        </div>
-        <p class="strength-card__text">出版・広告制作の現場で校正・確認業務を担当。ミスやリスクを早期に発見し、正確性と完成度を担保。刷り直しや重大な制作トラブルを発生させることなく業務を遂行してきました。</p>
-      </div>
-
-      <div class="strength-card">
-        <div class="strength-card__head">
-          <span class="strength-card__icon">
-            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </span>
-          <span class="strength-card__title">編集×Webの横断力</span>
-        </div>
-        <p class="strength-card__text">紙媒体の編集経験に加え、CMS運用やGA4分析、新規サイト立ち上げも経験。現在はフロントエンド技術を学び、Web領域への理解を深めています。</p>
-      </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1 class="hero__title">MY PORTFOLIO</h1>
+      <p class="hero__statement">伝えるだけで終わらせない。成果につながるコンテンツを。</p>
+      <p class="hero__name">Yuri Kazama</p>
+      <p class="hero__label">Web Director &amp; Editor</p>
     </div>
   </section>
 
-  <hr class="section__divider">
+  <main class="main">
 
-  <section class="section" id="works">
-    <p class="section__eyebrow">Works</p>
-    <h2 class="section__title">実績</h2>
+    <section class="section" id="about">
+      <p class="section__eyebrow">About</p>
+      <h2 class="section__title">自己紹介</h2>
 
-    <div class="works__container">
-
-      <div class="works__block slider-container">
-        <h3 class="works__category-title">Web編集・Webディレクション</h3>
-        <div class="slider-wrap">
-          <div class="slider-track" data-slider-track>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="tabiiro.png" alt="電子雑誌 旅色">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">電子雑誌「旅色」広告ページ制作</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">Web編集</span><span class="work-card__tag">CMS運用</span><span class="work-card__tag">進行管理</span><span class="work-card__tag">ブランジスタメディア</span>
-                  </div>
-                  <p class="work-card__desc">月約50本の広告制作案件において制作進行管理を担当。ライター・営業担当と連携し、スケジュール調整および品質管理を実施。CMS更新、画像加工、コンテンツ公開作業を担当。</p>
-                  <a href="https://tabiiro.jp/" target="_blank" rel="noopener" class="work-card__link">サイトを見る<svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="kanpo.png" alt="浜薬大学 漢方の扉">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">横浜薬科大学 漢方の扉 — Webディレクション</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">Webディレクション</span><span class="work-card__tag">サイト立ち上げ</span><span class="work-card__tag">マイナビ</span>
-                  </div>
-                  <p class="work-card__desc">新規サイト立ち上げ案件にてクライアントとの打ち合わせから担当。サイトマップ作成、制作会社への依頼・進行管理を実施。企画設計からディレクションを担当。</p>
-                  <a href="https://www.hamayaku.ac.jp/kampo-door/" target="_blank" rel="noopener" class="work-card__link">サイトを見る<svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="murozumi.png" alt="むろずみこども園">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">むろずみこども園 — Webディレクション</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">Webディレクション</span><span class="work-card__tag">進行管理</span><span class="work-card__tag">制作会社との調整</span><span class="work-card__tag">マイナビ</span>
-                  </div>
-                  <p class="work-card__desc">Webサイトリニューアルにおいて、クライアントとの要件整理から制作会社へのディレクション、進行管理まで担当。スケジュール調整および品質確認を行い、円滑な公開を支援。</p>
-                  <a href="https://murozumi-k.fukuoka-kodomo.ac.jp/" target="_blank" rel="noopener" class="work-card__link">サイトを見る<svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="hamayakubook.png" alt="浜薬大学 大学案内デジタルブック">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">横浜薬科大学 大学案内デジタルブック</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">企画編集</span><span class="work-card__tag">デジタルブック</span><span class="work-card__tag">Web連携</span><span class="work-card__tag">マイナビ</span>
-                  </div>
-                  <p class="work-card__desc">大学案内制作を担当。誌面編集・制作に加え、デジタルブック化およびWebサイトへの掲載対応まで実施。紙媒体とWebを連携した情報発信を支援。</p>
-                  <a href="https://www.d-pam.com/hamayaku/2311970/index.html" target="_blank" rel="noopener" class="work-card__link">デジタルブックを見る<svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="shanaiho_fix.png" alt="社内報">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">社内報・コンテンツ編集・GA4解析</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">Web編集</span><span class="work-card__tag">CMS運用</span><span class="work-card__tag">GA4</span><span class="work-card__tag">富士ソフト株式会社</span>
-                  </div>
-                  <p class="work-card__desc">社内報（紙・イントラCMS）の企画・編集・取材・校正を担当。AI関連コンテンツの企画運営およびGA4分析を実施。分析結果をレポーティングし、コンテンツ改善に活用。イントラCMSは社外秘のため非公開</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
+      <div class="about__layout">
+        <div>
+          <p class="about__name">風間 友里（かざま ゆり）</p>
+          <p class="about__intro">
+            紙媒体・Webコンテンツの企画編集から制作進行、ディレクションまで一貫して担当してきました。出版社・IT企業で10年以上にわたり、雑誌・書籍・医療専門誌の編集、広告制作、Webサイト運営に従事。CMS運用やGA4を用いたアクセス解析、新規サイト立ち上げなど幅広い業務を経験しています。現在はWebマーケティングおよびフロントエンド技術を学び、編集領域に加えてデジタル領域の対応力を強化しています。
+          </p>
         </div>
-        <div class="slider-controls">
-          <button class="slider-btn" data-slider-prev disabled><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-          <div class="slider-dots" data-slider-dots></div>
-          <button class="slider-btn" data-slider-next><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+
+        <div class="about__img">
+          <img src="profile_image.png" alt="田中由里のイメージイラスト">
         </div>
       </div>
-
-      <div class="works__block slider-container">
-        <h3 class="works__category-title">編集・広告制作</h3>
-        <div class="slider-wrap">
-          <div class="slider-track" data-slider-track>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="tabite.png" alt="旅の手帖">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">広告ページ制作・電車内動画広告</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">広告制作</span><span class="work-card__tag">制作ディレクション</span><span class="work-card__tag">進行管理</span><span class="work-card__tag">交通新聞社</span>
-                  </div>
-                  <p class="work-card__desc">「旅の手帖」等の広告タイアップ企画・進行管理を担当。クライアントとの調整から制作ディレクション、納品管理まで対応し、電車内動画広告の制作も兼務。</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="kiyosumi.png" alt="散歩の達人">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">雑誌・パンフレット制作</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">企画編集</span><span class="work-card__tag">取材</span><span class="work-card__tag">ライティング</span><span class="work-card__tag">交通新聞社</span>
-                  </div>
-                  <p class="work-card__desc">「散歩の達人」別冊の編集制作を担当。<br>企画立案から取材、撮影ディレクション、ライティング、校正まで一貫して担当。</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="biyou.png" alt="美容系会報誌">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">美容系会報誌編集</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">会報誌編集</span><span class="work-card__tag">取材・撮影</span><span class="work-card__tag">ドクターシーラボ</span>
-                  </div>
-                  <p class="work-card__desc">美容系会報誌の編集制作を担当。<br>企画立案、取材、撮影ディレクション、校正まで一貫して対応し、読者向けコンテンツ制作を推進。</p>
-                </div>
-              </div>
-            </div>
-
-                        <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="JEN2.png" alt="機内誌">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">雑誌編集（ぴあ・JAL機内誌等）</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">雑誌編集</span><span class="work-card__tag">ぴあ株式会社</span>
-                  </div>
-                  <p class="work-card__desc">エンタメ誌やJAL機内誌「JENガイド」の編集制作を担当。<br>取材内容の編集、原稿作成、校正に加え、印刷工程の進行管理まで携わる。</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="slider-slide">
-              <div class="work-card">
-                <div class="work-card__img" data-lb-trigger>
-                  <img src="influenza.png" alt="医学雑誌">
-                  <span class="work-card__zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
-                </div>
-                <div class="work-card__body">
-                  <p class="work-card__title">医療専門誌・書籍編集</p>
-                  <div class="work-card__meta">
-                    <span class="work-card__tag">書籍編集</span><span class="work-card__tag">取材</span><span class="work-card__tag">メディカルレビュー社</span>
-                  </div>
-                  <p class="work-card__desc">医療専門誌・書籍の編集制作を担当。<br>誌面ラフ作成、医療従事者へのインタビュー取材、原稿作成、進行管理、校正まで一貫して対応。</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="slider-controls">
-          <button class="slider-btn" data-slider-prev disabled><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-          <div class="slider-dots" data-slider-dots></div>
-          <button class="slider-btn" data-slider-next><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-        </div>
+      <div class="skill-chips">
+        <span class="skill-chip">コンテンツ企画・編集</span>
+        <span class="skill-chip">Webディレクション</span>
+        <span class="skill-chip">CMS運用</span>
+        <span class="skill-chip">GA4分析</span>
+        <span class="skill-chip">コンテンツ改善提案</span>
       </div>
 
-      <div class="works__block">
-              <h3 class="works__category-title">自主制作</h3>
-              <div class="jisaku-grid">
-            
-                <div class="work-card" data-lb-trigger>
-                  <div class="work-card__img">
-                    <img src="contents3.png" alt="コンテンツ改善レポート自動生成ツール">
+      <h3 class="strengths__title">私の強み</h3>
+
+      <div class="strengths-grid">
+        <div class="strength-card">
+          <div class="strength-card__head">
+            <span class="strength-card__icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M9 11l3 3L22 4" />
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+              </svg>
+            </span>
+            <span class="strength-card__title">プロジェクト推進力</span>
+          </div>
+          <p class="strength-card__text">
+            常時10本以上の案件を並行管理。クライアント・外注スタッフ双方と連携しながら制作を前進させ、納期遵守と品質維持を両立してきました。複数案件を同時進行する調整力が強みです。</p>
+        </div>
+
+        <div class="strength-card">
+          <div class="strength-card__head">
+            <span class="strength-card__icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </span>
+            <span class="strength-card__title">編集品質への責任感</span>
+          </div>
+          <p class="strength-card__text">
+            出版・広告制作の現場で校正・確認業務を担当。ミスやリスクを早期に発見し、正確性と完成度を担保。刷り直しや重大な制作トラブルを発生させることなく業務を遂行してきました。</p>
+        </div>
+
+        <div class="strength-card">
+          <div class="strength-card__head">
+            <span class="strength-card__icon">
+              <svg viewBox="0 0 24 24">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </span>
+            <span class="strength-card__title">編集×Webの横断力</span>
+          </div>
+          <p class="strength-card__text">紙媒体の編集経験に加え、CMS運用やGA4分析、新規サイト立ち上げも経験。現在はフロントエンド技術を学び、Web領域への理解を深めています。</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section__divider">
+
+    <section class="section" id="works">
+      <p class="section__eyebrow">Works</p>
+      <h2 class="section__title">実績</h2>
+
+      <div class="works__container">
+
+        <!-- 1. Web編集・Webディレクション -->
+        <div class="works__block slider-container">
+          <h3 class="works__category-title">Web編集・Webディレクション</h3>
+          <div class="slider-wrap">
+            <div class="slider-track" data-slider-track>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="tabiiro.png" alt="電子雑誌 旅色">
                     <span class="work-card__zoom"><svg viewBox="0 0 24 24">
                         <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
                       </svg></span>
                   </div>
                   <div class="work-card__body">
-                    <p class="work-card__title">コンテンツ改善レポート自動生成ツール</p>
+                    <p class="work-card__title">電子雑誌「旅色」広告ページ制作</p>
                     <div class="work-card__meta">
-                      <span class="work-card__tag">React</span><span class="work-card__tag">Chart.js</span><span
-                        class="work-card__tag">PDF出力</span><span class="work-card__tag">自主制作</span><span class="work-card__tag">AI連携</span>
+                      <span class="work-card__tag">Web編集</span><span class="work-card__tag">CMS運用</span><span
+                        class="work-card__tag">進行管理</span><span class="work-card__tag">ブランジスタメディア</span>
                     </div>
-                    <p class="work-card__desc">Webコンテンツの実績データ（PV・CTR・CV数）をもとに、改善ポイントや推奨施策をレポート形式で可視化するWebアプリを制作しました。</p>
+                    <p class="work-card__desc">
+                      月約50本の広告制作案件において制作進行管理を担当。ライター・営業担当と連携し、スケジュール調整および品質管理を実施。CMS更新、画像加工、コンテンツ公開作業を担当。</p>
+                    <a href="https://tabiiro.jp/" target="_blank" rel="noopener" class="work-card__link">サイトを見る<svg
+                        viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                      </svg></a>
                   </div>
                 </div>
-            
+              </div>
+
+              <div class="slider-slide">
                 <div class="work-card">
-                  <div class="work-card__body" style="padding-top:20px;">
-                    <p class="work-card__title">制作の工夫・今後の展望</p>
-            
-                    <p style="font-size:.78rem;font-weight:700;color:var(--accent-warm, #6b7f6e);margin-bottom:4px;">評価ロジックの工夫</p>
-                    <p class="work-card__desc">CVを最も重視した重み付けスコアで総合評価を算出。CV数は絶対値ではなく閲覧数に対する比率（CVR）で評価し、PVが多いだけの記事が過大評価されない設計。</p>
-            
-                    <p
-                      style="font-size:.78rem;font-weight:700;color:var(--accent-warm, #6b7f6e);margin-top:14px;margin-bottom:4px;">
-                      実装した機能</p>
-                    <p class="work-card__desc">スコアをレーダーチャートで可視化し、入力値に応じて課題・改善策・優先順位を自動生成。診断結果はPDFとして保存可能。さらにGemini APIと連携し、入力データをもとにAIが分析コメントを自動生成します。</p>
-            
-                    <p
-                      style="font-size:.78rem;font-weight:700;color:var(--accent-warm, #6b7f6e);margin-top:14px;margin-bottom:4px;">
-                      今後の展望</p>
-                    <p class="work-card__desc">現在はローカル環境でのAI連携を実装済み。今後は本番環境へのデプロイにより、URLで誰でもアクセスできる形での公開を予定しています。
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="kanpo.png" alt="浜薬大学 漢方の扉">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">横浜薬科大学 漢方の扉 — Webディレクション</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">Webディレクション</span><span class="work-card__tag">サイト立ち上げ</span><span
+                        class="work-card__tag">マイナビ</span>
+                    </div>
+                    <p class="work-card__desc">
+                      新規サイト立ち上げ案件にてクライアントとの打ち合わせから担当。サイトマップ作成、制作会社への依頼・進行管理を実施。企画設計から公開までディレクションを担当。</p>
+                    <a href="https://www.hamayaku.ac.jp/kampo-door/" target="_blank" rel="noopener"
+                      class="work-card__link">サイトを見る<svg viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                      </svg></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="murozumi.png" alt="むろずみこども園">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">むろずみこども園 — Webディレクション</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">Webディレクション</span><span class="work-card__tag">進行管理</span><span
+                        class="work-card__tag">制作会社との調整</span><span class="work-card__tag">マイナビ</span>
+                    </div>
+                    <p class="work-card__desc">
+                      Webサイトリニューアルにおいて、クライアントとの要件整理から制作会社へのディレクション、進行管理まで担当。スケジュール調整および品質確認を行い、円滑な公開を支援。</p>
+                    <a href="https://murozumi-k.fukuoka-kodomo.ac.jp/" target="_blank" rel="noopener"
+                      class="work-card__link">サイトを見る<svg viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                      </svg></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="hamayakubook.png" alt="浜薬大学 大学案内デジタルブック">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">横浜薬科大学 大学案内デジタルブック</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">企画編集</span><span class="work-card__tag">デジタルブック</span><span
+                        class="work-card__tag">Web連携</span><span class="work-card__tag">マイナビ</span>
+                    </div>
+                    <p class="work-card__desc">大学案内制作を担当。誌面編集・制作に加え、デジタルブック化およびWebサイトへの掲載対応まで実施。紙媒体とWebを連携した情報発信を支援。</p>
+                    <a href="https://www.d-pam.com/hamayaku/2311970/index.html" target="_blank" rel="noopener"
+                      class="work-card__link">デジタルブックを見る<svg viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                      </svg></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="shanaiho_fix.png" alt="社内報">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">社内報・コンテンツ編集・GA4解析</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">Web編集</span><span class="work-card__tag">CMS運用</span><span
+                        class="work-card__tag">GA4</span><span class="work-card__tag">富士ソフト株式会社</span>
+                    </div>
+                    <p class="work-card__desc">
+                      社内報（紙・イントラCMS）の企画・編集・取材・校正を担当。AI関連コンテンツの企画運営およびGA4分析を実施。分析結果をレポーティングし、コンテンツ改善に活用。イントラCMSは社外秘のため非公開
                     </p>
                   </div>
                 </div>
-            
               </div>
+
             </div>
+          </div>
+          <div class="slider-controls">
+            <button class="slider-btn" data-slider-prev disabled><svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+              </svg></button>
+            <div class="slider-dots" data-slider-dots></div>
+            <button class="slider-btn" data-slider-next><svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6" />
+              </svg></button>
+          </div>
+        </div>
 
+        <!-- 2. 編集・広告制作 -->
+        <div class="works__block slider-container">
+          <h3 class="works__category-title">編集・広告制作</h3>
+          <div class="slider-wrap">
+            <div class="slider-track" data-slider-track>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="tabite.png" alt="旅の手帖">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">広告ページ制作・電車内動画広告</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">広告制作</span><span class="work-card__tag">制作ディレクション</span><span
+                        class="work-card__tag">進行管理</span><span class="work-card__tag">交通新聞社</span>
+                    </div>
+                    <p class="work-card__desc">「旅の手帖」等の広告タイアップ企画・進行管理を担当。クライアントとの調整から制作ディレクション、納品管理まで対応し、電車内動画広告の制作も兼務。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="kiyosumi.png" alt="散歩の達人">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">雑誌・パンフレット制作</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">企画編集</span><span class="work-card__tag">取材</span><span
+                        class="work-card__tag">ライティング</span><span class="work-card__tag">交通新聞社</span>
+                    </div>
+                    <p class="work-card__desc">「散歩の達人」別冊の編集制作を担当。<br>企画立案から取材、撮影ディレクション、ライティング、校正まで一貫して担当。</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="biyou.png" alt="美容系会報誌">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">美容系会報誌編集</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">会報誌編集</span><span class="work-card__tag">取材・撮影</span><span
+                        class="work-card__tag">ドクターシーラボ</span>
+                    </div>
+                    <p class="work-card__desc">美容系会報誌の編集制作を担当。<br>企画立案、取材、撮影ディレクション、校正まで一貫して対応し、読者向けコンテンツ制作を推進。</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="JEN2.png" alt="機内誌">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">雑誌編集（ぴあ・JAL機内誌等）</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">雑誌編集</span><span class="work-card__tag">ぴあ株式会社</span>
+                    </div>
+                    <p class="work-card__desc">エンタメ誌やJAL機内誌「JENガイド」の編集制作を担当。<br>取材内容の編集、原稿作成、校正に加え、印刷工程の進行管理まで携わる。</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider-slide">
+                <div class="work-card">
+                  <div class="work-card__img" data-lb-trigger>
+                    <img src="influenza.png" alt="医学雑誌">
+                    <span class="work-card__zoom"><svg viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg></span>
+                  </div>
+                  <div class="work-card__body">
+                    <p class="work-card__title">医療専門誌・書籍編集</p>
+                    <div class="work-card__meta">
+                      <span class="work-card__tag">書籍編集</span><span class="work-card__tag">取材</span><span
+                        class="work-card__tag">メディカルレビュー社</span>
+                    </div>
+                    <p class="work-card__desc">医療専門誌・書籍の編集制作を担当。<br>誌面ラフ作成、医療従事者へのインタビュー取材、原稿作成、進行管理、校正まで一貫して対応。</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="slider-controls">
+            <button class="slider-btn" data-slider-prev disabled><svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+              </svg></button>
+            <div class="slider-dots" data-slider-dots></div>
+            <button class="slider-btn" data-slider-next><svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6" />
+              </svg></button>
+          </div>
+        </div>
+
+        <!-- 3. 自主制作（左右結合カード × スライダー） -->
+        <div class="works__block slider-container slider-container--single">
+          <h3 class="works__category-title">自主制作</h3>
+          <div class="slider-wrap">
+            <div class="slider-track" data-slider-track>
+
+              <!-- スライド1：AI肌診断ツール -->
+              <div class="slider-slide slider-slide--full">
+                <div class="personal-card">
+                  <div class="personal-card__left">
+                    <div class="personal-card__img" data-lb-trigger>
+                      <!-- 画像ファイル名（例：lysea.png）に合わせて差し替えてください -->
+                      <img src="skin-app.jpeg" alt="AI肌診断アプリ">
+                      <span class="personal-card__zoom"><svg viewBox="0 0 24 24">
+                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></span>
+                    </div>
+                    <div class="personal-card__summary">
+                      <p class="personal-card__title">AI肌診断アプリ</p>
+                      <div class="personal-card__meta">
+                        <span class="work-card__tag">React</span>
+                        <span class="work-card__tag">Flask</span>
+                        <span class="work-card__tag">Gemini API</span>
+                        <span class="work-card__tag">PDF出力</span>
+                        <span class="work-card__tag">自主制作</span>
+                      </div>
+                      <p class="personal-card__desc">
+                        <a href="https://yurik-coder.github.io/lysea-beaute/" target="_blank"
+                          style="color: rgb(101, 121, 179) !important; text-decoration: underline !important; font-weight: normal;">スキンケアコスメECサイト</a>と連動したAI肌診断アプリ。問診と顔写真からAIが肌状態を5項目でスコア化し、診断結果に応じたおすすめ商品をECサイトの商品詳細ページへ誘導。<br> <br> ※通信の混雑対策のため、本ページではデモ用の固定結果を表示</p>
+                      <div class="personal-card__links">
+                        <!-- ECサイトの公開URLに合わせて変更してください -->
+                        <a href="https://lysea-skin-diagnosis.vercel.app/" target="_blank" rel="noopener"
+                          class="work-card__link">AI肌診断を見る<svg viewBox="0 0 24 24">
+                            <path d="M7 17L17 7M7 7h10v10" />
+                          </svg></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="personal-card__right">
+                    <p class="personal-card__section-title">制作の工夫・今後の展望</p>
+              
+                    <p class="personal-card__sub-title">評価ロジックの工夫</p>
+                    <p class="personal-card__desc">
+                    スコア算出・コメント生成はGeminiAPIに任せる一方、肌年齢の算出・診断タイプの命名・おすすめ商品の選定はJS/Pythonの決定的なロジックで実装。AIに委ねる範囲を絞ることで、APIコストを抑えながら診断結果の一貫性を確保しました。
+                    </p>
+              
+                    <p class="personal-card__sub-title">実装した機能</p>
+                    <p class="personal-card__desc">
+                      問診と顔写真（画像60%・問診40%）をもとにした肌診断、レーダーチャートによる結果の可視化、診断結果に応じたECサイトへの動的リンク、PDF出力、レスポンシブ対応を実装。Gemini
+                      APIの通信エラーに備えたリトライ処理や、デモ用の固定レスポンスへの切り替え機能も備えています。
+              
+                    <p class="personal-card__sub-title">今後の展望</p>
+                    <p class="personal-card__desc">
+                      現在はECサイトとローカル・デプロイ環境の双方で連携済み。今後はCloudflare Pages + Workersへの移行や、肌年齢の算出ロジックのさらなる精度向上を予定しています。</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- スライド2：スキンケアコスメECサイト -->
+              <div class="slider-slide slider-slide--full">
+                <div class="personal-card">
+                  <div class="personal-card__left">
+                    <div class="personal-card__img" data-lb-trigger>
+                      <!-- 画像ファイル名（例：lysea.png）に合わせて差し替えてください -->
+                      <img src="lysea_ec.jpeg" alt="スキンケアコスメECサイト">
+                      <span class="personal-card__zoom"><svg viewBox="0 0 24 24">
+                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></span>
+                    </div>
+                    <div class="personal-card__summary">
+                      <p class="personal-card__title">スキンケアコスメECサイト</p>
+                      <div class="personal-card__meta">
+                        <span class="work-card__tag">HTML/CSS/JS</span>
+                        <!-- <span class="work-card__tag">JS(GSAP)</span> -->
+                        <span class="work-card__tag">レスポンシブ</span>
+                        <span class="work-card__tag">フィルタリング検索</span>
+                        <span class="work-card__tag">カート機能</span>
+                      </div>
+                      <p class="personal-card__desc">
+                        架空のスキンケアブランドのECサイト。商品検索から購入までの一連のEC体験を設計・実装。<a href="https://lysea-skin-diagnosis.vercel.app/" target="_blank"
+                          style="color: rgb(101, 121, 179) !important; text-decoration: underline !important; font-weight: normal;">AI肌診断アプリ</a>と連携し、診断結果からパーソナライズした商品ページへ直接誘導する導線を構築。</p>
+                      <div class="personal-card__links">
+                        <!-- ECサイトの公開URLに合わせて変更してください -->
+                        <a href="https://yurik-coder.github.io/lysea-beaute/" target="_blank" rel="noopener"
+                          class="work-card__link">ECサイトを見る<svg viewBox="0 0 24 24">
+                            <path d="M7 17L17 7M7 7h10v10" />
+                          </svg></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="personal-card__right">
+                    <p class="personal-card__section-title">制作の工夫・今後の展望</p>
+
+                    <p class="personal-card__sub-title">導線・情報設計の工夫</p>
+                    <p class="personal-card__desc">
+                      店舗接客のないECサイトの課題に対し、「肌悩み」「カテゴリ」「シリーズ」という3軸の検索導線と、AI肌診断からのパーソナライズ誘導を組み合わせた、双方向の回遊設計にしました。
+                    </p>
+
+                    <p class="personal-card__sub-title">実装した機能</p>
+                    <p class="personal-card__desc">
+                      約30商品のフィルタリング検索、横断スマート検索、クイック商品モーダル、URLパラメータによるAI肌診断との連携、カート・お気に入り機能、ランキング・新着・限定キャンペーン、コラム・お知らせページを実装しました。
+                    </p>
+
+                    <p class="personal-card__sub-title">今後の展望</p>
+                    <p class="personal-card__desc">
+                      現在は静的HTML/JSでの実装ですが、今後はバックエンドと連携し、実際の在庫・注文管理ができる構成への発展を検討しています。</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- スライド3：コンテンツ改善レポート自動生成ツール -->
+              <div class="slider-slide slider-slide--full">
+                <div class="personal-card">
+                  <div class="personal-card__left">
+                    <div class="personal-card__img" data-lb-trigger>
+                      <img src="contents3.png" alt="コンテンツ改善レポート自動生成ツール">
+                      <span class="personal-card__zoom"><svg viewBox="0 0 24 24">
+                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg></span>
+                    </div>
+                    <div class="personal-card__summary">
+                      <p class="personal-card__title">コンテンツ改善レポート自動生成ツール</p>
+                      <div class="personal-card__meta">
+                        <span class="work-card__tag">React</span>
+                        <span class="work-card__tag">Chart.js</span>
+                        <span class="work-card__tag">PDF出力</span>
+                        <span class="work-card__tag">AI連携</span>
+                        <span class="work-card__tag">自主制作</span>
+                      </div>
+                      <p class="personal-card__desc">
+                        Webコンテンツの実績データ（PV・CTR・CV数）をもとに、改善ポイントや推奨施策をレポート形式で可視化するWebアプリを制作しました。
+                      </p>
+                      <!-- <div class="personal-card__links"> -->
+                        <!-- ツールの公開URLがあれば設定してください -->
+                        <!-- <a href="#" target="_blank" rel="noopener" class="work-card__link">アプリを見る<svg
+                            viewBox="0 0 24 24">
+                            <path d="M7 17L17 7M7 7h10v10" />
+                          </svg></a>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="personal-card__right">
+                    <p class="personal-card__section-title">制作の工夫・今後の展望</p>
+
+                    <p class="personal-card__sub-title">評価ロジックの工夫</p>
+                    <p class="personal-card__desc">
+                      CVを最も重視した重み付けスコアで総合評価を算出。CV数は絶対値ではなく閲覧数に対する比率（CVR）で評価し、PVが多いだけの記事が過大評価されない設計。</p>
+
+                    <p class="personal-card__sub-title">実装した機能</p>
+                    <p class="personal-card__desc">
+                      スコアをレーダーチャートで可視化し、入力値に応じて課題・改善策・優先順位を自動生成します。診断結果はそのままPDFとして保存可能。さらにGemini
+                      APIと連携し、入力データをもとにAIが分析コメントを自動生成します。</p>
+
+                    <p class="personal-card__sub-title">今後の展望</p>
+                    <p class="personal-card__desc">現在はローカル環境でのAI連携を実装済み。今後は本番環境へのデプロイにより、URLで誰でもアクセスできる形での公開を予定しています。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="slider-controls">
+            <button class="slider-btn" data-slider-prev disabled><svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+              </svg></button>
+            <div class="slider-dots" data-slider-dots></div>
+            <button class="slider-btn" data-slider-next><svg viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6" />
+              </svg></button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="section__divider">
+
+    <section class="section" id="learning">
+      <p class="section__eyebrow">Skills &amp; Reskilling</p>
+      <h2 class="section__title">デジタル領域の強化</h2>
+
+      <div class="learning__content">
+        <p style="font-size:.75rem;color:var(--ink-muted);font-family:var(--font-ui);margin-bottom:20px">職業訓練校 ／
+          2026年8月卒業予定</p>
+
+        <div class="learning-grid">
+          <div class="learning-card">
+            <div class="learning-card__icon"><svg viewBox="0 0 24 24">
+                <path d="M3 3h18v18H3z" stroke-width="0" />
+                <path d="M3 9h18M9 21V9" stroke="var(--accent)" stroke-width="1.8" fill="none" />
+              </svg></div>
+            <p class="learning-card__title">Webマーケティング</p>
+            <p class="learning-card__text">3C・STP analysis / ユーザーペルソナ設計 / SEO戦略立案</p>
+          </div>
+          <div class="learning-card">
+            <div class="learning-card__icon"><svg viewBox="0 0 24 24">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg></div>
+            <p class="learning-card__title">技術理解・Web制作</p>
+            <p class="learning-card__text">HTML / CSS / JavaScript /React・Figma</p>
+          </div>
+          <div class="learning-card">
+            <div class="learning-card__icon"><svg viewBox="0 0 24 24">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg></div>
+            <p class="learning-card__title">データ駆動型分析</p>
+            <p class="learning-card__text">GA4・アクセス解析・レポーティング</p>
+          </div>
+          <div class="learning-card">
+            <div class="learning-card__icon"><svg viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg></div>
+            <p class="learning-card__title">設計・AI活用</p>
+            <p class="learning-card__text">DaVinci Resolve・Canva / 生成AIによる業務効率化</p>
+          </div>
+        </div>
+
+        <div class="tools-label">使用ツール</div>
+        <div class="tools-grid">
+          <span class="tool-chip">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.85 8.42c-.37-.16-.77-.23-1.18-.22H7.25v3.93h1.32c.43.01.85-.07 1.25-.24.34-.15.62-.4.81-.72.19-.33.29-.7.28-1.08.01-.37-.09-.74-.27-1.07-.19-.32-.47-.56-.79-.6zM0 4.77v14.46C0 20.77 1.23 22 2.77 22h18.46C22.77 22 24 20.77 24 19.23V4.77C24 3.23 22.77 2 21.23 2H2.77C1.23 2 0 3.23 0 4.77zm10.23 9.86c-.43.4-.96.68-1.54.82-.63.16-1.27.23-1.92.22H7.25V18H5.58V6.68h3.14c.64-.01 1.28.08 1.89.27.51.16.98.44 1.36.82.35.36.61.8.76 1.28.16.52.24 1.06.23 1.6.01.57-.09 1.14-.29 1.68-.2.53-.52 1-.99 1.3zM16.4 18.16c-.51-.01-1.02-.09-1.51-.24-.42-.13-.82-.33-1.17-.6l.5-1.27c.33.24.7.43 1.08.55.42.14.86.21 1.3.21.47.02.93-.08 1.35-.3.32-.17.51-.5.5-.86 0-.27-.1-.53-.28-.73-.22-.23-.48-.41-.77-.53-.33-.14-.7-.29-1.1-.44-.4-.15-.77-.31-1.1-.5-.31-.18-.57-.43-.77-.73-.21-.33-.32-.72-.31-1.11-.01-.42.1-.83.31-1.2.22-.37.54-.67.92-.87.45-.23.96-.34 1.47-.33.44 0 .87.06 1.29.18.36.1.7.26 1.01.46l-.47 1.27c-.28-.18-.59-.32-.91-.42-.33-.1-.68-.16-1.02-.15-.41-.02-.82.08-1.17.3-.28.18-.44.5-.43.83 0 .26.09.51.27.7.21.21.46.38.74.5l1.1.44c.41.15.8.33 1.17.54.34.19.62.46.83.79.22.36.33.78.32 1.2.01.43-.11.86-.33 1.23-.24.38-.58.68-.99.87-.5.22-1.04.33-1.59.31z"
+                fill="#31A8FF" />
+            </svg>
+            Photoshop
+          </span>
+          <span class="tool-chip">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10.33 8.38H7.82L6.6 12H4.96l4.2-11.33h1.98L15.36 12h-1.7zm-2.1-1.33h1.69L9.05 3.43 8.23 7.05zM16.18 3.97c0-.56.38-.94.92-.94.55 0 .91.38.91.94 0 .55-.36.93-.91.93-.54 0-.92-.38-.92-.93zm.1 2.17h1.65V12h-1.65V6.14zM0 1.5A1.5 1.5 0 0 1 1.5 0h21A1.5 1.5 0 0 1 24 1.5v21a1.5 1.5 0 0 1-1.5 1.5h-21A1.5 1.5 0 0 1 0 22.5v-21z"
+                fill="#FF9A00" />
+            </svg>
+            Illustrator
+          </span>
+          <span class="tool-chip">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.354 3.019-3.019s-1.354-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49h4.588V8.981zm-4.587-7.51c-1.665 0-3.019 1.354-3.019 3.019s1.354 3.019 3.019 3.019h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 10.979c-1.665 0-3.019 1.354-3.019 3.019s1.354 3.019 3.019 3.019h3.117v-6.038H8.148zm8.704 8.853c0 2.476-2.014 4.49-4.49 4.49s-4.49-2.014-4.49-4.49 2.014-4.49 4.49-4.49 4.49 2.014 4.49 4.49zm-7.509.001c0 1.665 1.354 3.019 3.019 3.019s3.019-1.354 3.019-3.019-1.354-3.019-3.019-3.019-3.019 1.354-3.019 3.019z"
+                fill="#F24E1E" />
+            </svg>
+            Figma
+          </span>
+          <span class="tool-chip">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"
+                fill="#E34F26" />
+            </svg>
+            HTML / CSS
+          </span>
+          <span class="tool-chip">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"
+                fill="#F7DF1E" />
+            </svg>
+            JavaScript（基礎）
+          </span>
+          <span class="tool-chip">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12c6.627 0 12-5.373 12-12S18.627 0 12 0zm.14 19.018c-3.868 0-7-3.14-7-7.018c0-3.878 3.132-7.018 7-7.018c1.89 0 3.47.697 4.682 1.829l-1.974 1.978v-.004c-.735-.702-1.667-1.062-2.708-1.062c-2.31 0-4.187 1.956-4.187 4.273c0 2.315 1.877 4.277 4.187 4.277c2.096 0 3.522-1.202 3.816-2.852H12.14v-2.737h6.585c.088.47.135.96.135 1.474c0 4.01-2.677 6.86-6.72 6.86z"
+                fill="#E37400" />
+            </svg>
+            GA4 解析・レポーティング
+          </span>
+        </div>
+
+        <!-- <div class="certs-label">2026年9月受験予定</div>
+        <ul class="certs-list">
+          <li class="cert">Google アナリティクス認定資格</li>
+          <li class="cert">Google 検索広告資格</li>
+        </ul> -->
+
+        <div class="sw-label">演習成果物</div>
+        <div class="sw-grid">
+          <div class="sw-item" data-lb-trigger>
+            <div class="sw-item__img">
+              <img src="marketingReport.png" alt="マーケティングレポート">
+            </div>
+            <div class="sw-item__body">
+              <p class="sw-item__cap">Webマーケティング戦略レポート</p>
+              <p class="sw-item__desc">
+                対象企業：Panasonic<br>Panasonicのサービスを題材に市場分析を実施。SWOT分析とカスタマージャーニー設計を通じて、SEOおよび集客施策を提案。</p>
+            </div>
+          </div>
+          <div class="sw-item" data-lb-trigger>
+            <div class="sw-item__img">
+              <img src="omusubi.png" alt="サイト制作">
+            </div>
+            <div class="sw-item__body">
+              <p class="sw-item__cap">Webサイト制作演習（モックアップ構築）</p>
+              <p class="sw-item__desc">架空のおにぎり専門店サイトを制作。<br>レスポンシブ対応やメニュー機能を実装し、デザインからコーディングまで一貫して制作。</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="section__divider">
+
+    <section class="section" id="vision">
+      <p class="section__eyebrow">Vision</p>
+      <h2 class="section__title">マインド・今後の展望</h2>
+
+      <div class="vision-cards">
+        <div class="vision-card">
+          <p class="vision-card__label">手戻りを防ぐ進行設計</p>
+          <p class="vision-card__text">
+            企画意図や目的を丁寧に共有し、ライター・デザイナー・クライアントそれぞれが動きやすい環境を整えることを大切にしています。品質と納期を守るだけでなく、チーム全体が気持ちよく仕事を進められる進行を心掛けています。</p>
+        </div>
+        <div class="vision-card">
+          <p class="vision-card__label">編集×データ活用人材へ</p>
+          <p class="vision-card__text">
+            編集・ディレクション経験に加え、Webマーケティングやデータ分析の知識を活用し、ユーザー視点と数値根拠の両面からコンテンツ改善を提案できる人材を目指しています。企画・運用・改善まで一貫して関わり、成果につながるコンテンツづくりに貢献したいと考えています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-title">Contact</h2>
+      <p class="contact-sub">お気軽にご連絡ください</p>
+      <div class="contact-row">
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          Yuri Kazama（風間 友里）
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.26-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          080-5020-6297
+          <button class="contact-item__copy js-copy" data-copy="080-5020-6297">copy</button>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1-.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          yurikazama28@gmail.com
+          <button class="contact-item__copy js-copy" data-copy="yurikazama28@gmail.com">copy</button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <hr class="section__divider">
+  <footer class="footer">
+    <small>&copy; 2026 Yuri Kazama</small>
+  </footer>
 
-  <section class="section" id="learning">
-    <p class="section__eyebrow">Skills &amp; Reskilling</p>
-    <h2 class="section__title">デジタル領域の強化</h2>
+  <div class="toast" id="js-toast">コピーしました</div>
 
-    <div class="learning__content">
-      <p style="font-size:.75rem;color:var(--ink-muted);font-family:var(--font-ui);margin-bottom:20px">職業訓練校 ／ 2026年8月卒業予定</p>
-
-      <div class="learning-grid">
-        <div class="learning-card">
-          <div class="learning-card__icon"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" stroke-width="0"/><path d="M3 9h18M9 21V9" stroke="var(--accent)" stroke-width="1.8" fill="none"/></svg></div>
-          <p class="learning-card__title">Webマーケティング</p>
-          <p class="learning-card__text">3C・STP analysis / ユーザーペルソナ設計 / SEO戦略立案</p>
-        </div>
-        <div class="learning-card">
-          <div class="learning-card__icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-          <p class="learning-card__title">技術理解・Web制作</p>
-          <p class="learning-card__text">HTML / CSS / JavaScript /React・Figma</p>
-        </div>
-        <div class="learning-card">
-          <div class="learning-card__icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-          <p class="learning-card__title">データ駆動型分析</p>
-          <p class="learning-card__text">GA4・アクセス解析・レポーティング</p>
-        </div>
-        <div class="learning-card">
-          <div class="learning-card__icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-          <p class="learning-card__title">設計・AI活用</p>
-          <p class="learning-card__text">DaVinci Resolve・Canva / 生成AIによる業務効率化</p>
-        </div>
-      </div>
-
-      <div class="tools-label">使用ツール</div>
-      <div class="tools-grid">
-        <span class="tool-chip">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.85 8.42c-.37-.16-.77-.23-1.18-.22H7.25v3.93h1.32c.43.01.85-.07 1.25-.24.34-.15.62-.4.81-.72.19-.33.29-.7.28-1.08.01-.37-.09-.74-.27-1.07-.19-.32-.47-.56-.79-.6zM0 4.77v14.46C0 20.77 1.23 22 2.77 22h18.46C22.77 22 24 20.77 24 19.23V4.77C24 3.23 22.77 2 21.23 2H2.77C1.23 2 0 3.23 0 4.77zm10.23 9.86c-.43.4-.96.68-1.54.82-.63.16-1.27.23-1.92.22H7.25V18H5.58V6.68h3.14c.64-.01 1.28.08 1.89.27.51.16.98.44 1.36.82.35.36.61.8.76 1.28.16.52.24 1.06.23 1.6.01.57-.09 1.14-.29 1.68-.2.53-.52 1-.99 1.3zM16.4 18.16c-.51-.01-1.02-.09-1.51-.24-.42-.13-.82-.33-1.17-.6l.5-1.27c.33.24.7.43 1.08.55.42.14.86.21 1.3.21.47.02.93-.08 1.35-.3.32-.17.51-.5.5-.86 0-.27-.1-.53-.28-.73-.22-.23-.48-.41-.77-.53-.33-.14-.7-.29-1.1-.44-.4-.15-.77-.31-1.1-.5-.31-.18-.57-.43-.77-.73-.21-.33-.32-.72-.31-1.11-.01-.42.1-.83.31-1.2.22-.37.54-.67.92-.87.45-.23.96-.34 1.47-.33.44 0 .87.06 1.29.18.36.1.7.26 1.01.46l-.47 1.27c-.28-.18-.59-.32-.91-.42-.33-.1-.68-.16-1.02-.15-.41-.02-.82.08-1.17.3-.28.18-.44.5-.43.83 0 .26.09.51.27.7.21.21.46.38.74.5l1.1.44c.41.15.8.33 1.17.54.34.19.62.46.83.79.22.36.33.78.32 1.2.01.43-.11.86-.33 1.23-.24.38-.58.68-.99.87-.5.22-1.04.33-1.59.31z" fill="#31A8FF"/></svg>
-          Photoshop
-        </span>
-        <span class="tool-chip">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.33 8.38H7.82L6.6 12H4.96l4.2-11.33h1.98L15.36 12h-1.7zm-2.1-1.33h1.69L9.05 3.43 8.23 7.05zM16.18 3.97c0-.56.38-.94.92-.94.55 0 .91.38.91.94 0 .55-.36.93-.91.93-.54 0-.92-.38-.92-.93zm.1 2.17h1.65V12h-1.65V6.14zM0 1.5A1.5 1.5 0 0 1 1.5 0h21A1.5 1.5 0 0 1 24 1.5v21a1.5 1.5 0 0 1-1.5 1.5h-21A1.5 1.5 0 0 1 0 22.5v-21z" fill="#FF9A00"/></svg>
-          Illustrator
-        </span>
-        <span class="tool-chip">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.354 3.019-3.019s-1.354-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49h4.588V8.981zm-4.587-7.51c-1.665 0-3.019 1.354-3.019 3.019s1.354 3.019 3.019 3.019h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 10.979c-1.665 0-3.019 1.354-3.019 3.019s1.354 3.019 3.019 3.019h3.117v-6.038H8.148zm8.704 8.853c0 2.476-2.014 4.49-4.49 4.49s-4.49-2.014-4.49-4.49 2.014-4.49 4.49-4.49 4.49 2.014 4.49 4.49zm-7.509.001c0 1.665 1.354 3.019 3.019 3.019s3.019-1.354 3.019-3.019-1.354-3.019-3.019-3.019-3.019 1.354-3.019 3.019z" fill="#F24E1E"/></svg>
-          Figma
-        </span>
-        <span class="tool-chip">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" fill="#E34F26"/></svg>
-          HTML / CSS
-        </span>
-        <span class="tool-chip">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#F7DF1E"/></svg>
-          JavaScript / React
-
-        </span>
-        <span class="tool-chip">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12c6.627 0 12-5.373 12-12S18.627 0 12 0zm.14 19.018c-3.868 0-7-3.14-7-7.018c0-3.878 3.132-7.018 7-7.018c1.89 0 3.47.697 4.682 1.829l-1.974 1.978v-.004c-.735-.702-1.667-1.062-2.708-1.062c-2.31 0-4.187 1.956-4.187 4.273c0 2.315 1.877 4.277 4.187 4.277c2.096 0 3.522-1.202 3.816-2.852H12.14v-2.737h6.585c.088.47.135.96.135 1.474c0 4.01-2.677 6.86-6.72 6.86z" fill="#E37400"/></svg>
-          GA4 解析・レポーティング
-        </span>
-      </div>
-
-      <div class="certs-label">2026年8月受験予定</div>
-      <ul class="certs-list">
-        <li class="cert">Google アナリティクス認定資格</li>
-        <li class="cert">Google 検索広告資格</li>
-      </ul>
-
-      <div class="sw-label">演習成果物</div>
-      <div class="sw-grid">
-        <div class="sw-item" data-lb-trigger>
-          <div class="sw-item__img">
-            <img src="marketingReport.png" alt="マーケティングレポート">
-          </div>
-          <div class="sw-item__body">
-            <p class="sw-item__cap">Webマーケティング戦略レポート</p>
-            <p class="sw-item__desc">対象企業：Panasonic<br>Panasonicのサービスを題材に市場分析を実施。SWOT分析とカスタマージャーニー設計を通じて、SEOおよび集客施策を提案。</p>
-          </div>
-        </div>
-        <div class="sw-item" data-lb-trigger>
-          <div class="sw-item__img">
-            <img src="omusubi.png" alt="サイト制作">
-          </div>
-          <div class="sw-item__body">
-            <p class="sw-item__cap">Webサイト制作演習（モックアップ構築）</p>
-            <p class="sw-item__desc">架空のおにぎり専門店サイトを制作。<br>レスポンシブ対応やメニュー機能を実装し、デザインからコーディングまで一貫して制作。</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <hr class="section__divider">
-
-  <section class="section" id="vision">
-    <p class="section__eyebrow">Vision</p>
-    <h2 class="section__title">マインド・今後の展望</h2>
-
-    <div class="vision-cards">
-      <div class="vision-card">
-        <p class="vision-card__label">手戻りを防ぐ進行設計</p>
-        <p class="vision-card__text">企画意図や目的を丁寧に共有し、ライター・デザイナー・クライアントそれぞれが動きやすい環境を整えることを大切にしています。品質と納期を守るだけでなく、チーム全体が気持ちよく仕事を進められる進行を心掛けています。</p>
-      </div>
-      <div class="vision-card">
-        <p class="vision-card__label">編集×データ活用人材へ</p>
-        <p class="vision-card__text">編集・ディレクション経験に加え、Webマーケティングやデータ分析の知識を活用し、ユーザー視点と数値根拠の両面からコンテンツ改善を提案できる人材を目指しています。企画・運用・改善まで一貫して関わり、成果につながるコンテンツづくりに貢献したいと考えています。</p>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<section class="contact-section" id="contact">
-  <div class="contact-inner">
-    <h2 class="contact-title">Contact</h2>
-    <p class="contact-sub">お気軽にご連絡ください</p>
-    <div class="contact-row">
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Yuri Kazama（風間 友里）
-      </div>
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.26-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        080-5020-6297
-        <button class="contact-item__copy js-copy" data-copy="080-5020-6297">copy</button>
-      </div>
-      <div class="contact-item">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1-.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        yurikazama28@gmail.com
-        <button class="contact-item__copy js-copy" data-copy="yurikazama28@gmail.com">copy</button>
-      </div>
-    </div>
+  <div class="lightbox" id="js-lightbox">
+    <img class="lightbox__img" id="js-lb-img" src="" alt="">
+    <button class="lightbox__close" id="js-lb-close">✕</button>
   </div>
-</section>
 
-<footer class="footer">
-  <small>&copy; 2026 Yuri kazama</small>
-</footer>
-
-<div class="toast" id="js-toast">コピーしました</div>
-
-<div class="lightbox" id="js-lightbox">
-  <img class="lightbox__img" id="js-lb-img" src="" alt="">
-  <button class="lightbox__close" id="js-lb-close">✕</button>
-</div>
-
-<script>
-// ── HEADER SCROLL EFFECT ──
-const headerElement = document.getElementById('js-header');
-window.addEventListener('scroll', () => {
-  headerElement.classList.toggle('is-scrolled', window.scrollY > 60);
-});
-
-// LOGO CLICK TO TOP
-document.getElementById('js-logo').addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ── DRAWER NAVIGATION ──
-const menuButton = document.getElementById('js-menu');
-const drawerElement = document.getElementById('js-drawer');
-
-menuButton.addEventListener('click', () => {
-  const isMenuOpen = menuButton.classList.toggle('is-checked');
-  drawerElement.classList.toggle('is-open', isMenuOpen);
-  document.body.classList.toggle('is-fixed', isMenuOpen);
-  menuButton.setAttribute('aria-expanded', 'false');
-});
-
-document.querySelectorAll('.js-nav').forEach(navLink => {
-  navLink.addEventListener('click', () => {
-    menuButton.classList.remove('is-checked');
-    drawerElement.classList.remove('is-open');
-    document.body.classList.remove('is-fixed');
-    menuButton.setAttribute('aria-expanded', 'false');
-  });
-});
-
-// ── SLIDER COMPONENT ──
-function initializeSlider(container) {
-  const trackElement = container.querySelector('[data-slider-track]');
-  const slides = trackElement.querySelectorAll('.slider-slide');
-  const totalSlidesCount = slides.length;
-  
-  const dotsWrapper = container.querySelector('[data-slider-dots]');
-  const prevButton = container.querySelector('[data-slider-prev]');
-  const nextButton = container.querySelector('[data-slider-next]');
-  let currentSlideIndex = 0;
-
-  // Generate Navigation Dots
-  slides.forEach((_, index) => {
-    const dotButton = document.createElement('button');
-    dotButton.className = 'slider-dot' + (index === 0 ? ' is-active' : '');
-    dotButton.setAttribute('aria-label', `${index + 1}枚目のスライド`);
-    dotButton.addEventListener('click', () => navigateToSlide(index));
-    dotsWrapper.appendChild(dotButton);
-  });
-
-  function getVisibleSlidesCount() {
-    return window.innerWidth >= 640 ? 2 : 1;
-  }
-
-  function getMaxScrollIndex() {
-    return Math.max(0, totalSlidesCount - getVisibleSlidesCount());
-  }
-
-  function navigateToSlide(index) {
-    currentSlideIndex = Math.max(0, Math.min(index, getMaxScrollIndex()));
-    const translationPercentage = currentSlideIndex * (100 / getVisibleSlidesCount());
-    trackElement.style.transform = `translateX(-${translationPercentage}%)`;
-    
-    prevButton.disabled = (currentSlideIndex === 0);
-    nextButton.disabled = (currentSlideIndex >= getMaxScrollIndex());
-    
-    const dots = dotsWrapper.querySelectorAll('.slider-dot');
-    dots.forEach((dot, dotIndex) => {
-      dot.classList.toggle('is-active', dotIndex === currentSlideIndex);
+  <script>
+    // ── HEADER SCROLL EFFECT ──
+    const headerElement = document.getElementById('js-header');
+    window.addEventListener('scroll', () => {
+      headerElement.classList.toggle('is-scrolled', window.scrollY > 60);
     });
-  }
 
-  prevButton.addEventListener('click', () => navigateToSlide(currentSlideIndex - 1));
-  nextButton.addEventListener('click', () => navigateToSlide(currentSlideIndex + 1));
-  
-  window.addEventListener('resize', () => {
-    navigateToSlide(currentSlideIndex);
-  });
-  
-  navigateToSlide(0);
-}
-
-// ── LIGHTBOX GRAPHICS CONTAINER ──
-const lightboxElement = document.getElementById('js-lightbox');
-const lightboxImageElement = document.getElementById('js-lb-img');
-
-function openLightbox(imageSource) {
-  if (!imageSource) return;
-  lightboxImageElement.src = imageSource;
-  lightboxElement.classList.add('is-open');
-  document.body.classList.add('is-fixed');
-}
-
-function closeLightbox() {
-  lightboxElement.classList.remove('is-open');
-  document.body.classList.remove('is-fixed');
-}
-
-document.querySelectorAll('[data-lb-trigger]').forEach(triggerElement => {
-  triggerElement.addEventListener('click', () => {
-    const embeddedImage = triggerElement.querySelector('img');
-    if (embeddedImage && embeddedImage.src) openLightbox(embeddedImage.src);
-  });
-});
-
-document.getElementById('js-lb-close').addEventListener('click', closeLightbox);
-lightboxElement.addEventListener('click', (event) => {
-  if (event.target === lightboxElement) closeLightbox();
-});
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') closeLightbox();
-});
-
-// ── CLIPBOARD TOAST SYSTEM ──
-const toastNotification = document.getElementById('js-toast');
-let toastTimeoutId;
-
-document.querySelectorAll('.js-copy').forEach(copyButton => {
-  copyButton.addEventListener('click', () => {
-    navigator.clipboard.writeText(copyButton.dataset.copy).then(() => {
-      clearTimeout(toastTimeoutId);
-      toastNotification.classList.add('is-show');
-      toastTimeoutId = setTimeout(() => toastNotification.classList.remove('is-show'), 2000);
+    // LOGO CLICK TO TOP
+    document.getElementById('js-logo').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  });
-});
 
-// ── INITIALIZE COMPONENTS ON DOM LOAD ──
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.slider-container').forEach(container => {
-    initializeSlider(container);
-  });
-});
-</script>
+    // ── DRAWER NAVIGATION ──
+    const menuButton = document.getElementById('js-menu');
+    const drawerElement = document.getElementById('js-drawer');
+
+    menuButton.addEventListener('click', () => {
+      const isMenuOpen = menuButton.classList.toggle('is-checked');
+      drawerElement.classList.toggle('is-open', isMenuOpen);
+      document.body.classList.toggle('is-fixed', isMenuOpen);
+      menuButton.setAttribute('aria-expanded', 'false');
+    });
+
+    document.querySelectorAll('.js-nav').forEach(navLink => {
+      navLink.addEventListener('click', () => {
+        menuButton.classList.remove('is-checked');
+        drawerElement.classList.remove('is-open');
+        document.body.classList.remove('is-fixed');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ── SLIDER COMPONENT (全幅・単一スライダー対応) ──
+    function initializeSlider(container) {
+      const trackElement = container.querySelector('[data-slider-track]');
+      const slides = trackElement.querySelectorAll('.slider-slide');
+      const totalSlidesCount = slides.length;
+
+      const dotsWrapper = container.querySelector('[data-slider-dots]');
+      const prevButton = container.querySelector('[data-slider-prev]');
+      const nextButton = container.querySelector('[data-slider-next]');
+      let currentSlideIndex = 0;
+
+      slides.forEach((_, index) => {
+        const dotButton = document.createElement('button');
+        dotButton.className = 'slider-dot' + (index === 0 ? ' is-active' : '');
+        dotButton.setAttribute('aria-label', `${index + 1}枚目のスライド`);
+        dotButton.addEventListener('click', () => navigateToSlide(index));
+        dotsWrapper.appendChild(dotButton);
+      });
+
+      function getVisibleSlidesCount() {
+        if (container.classList.contains('slider-container--single')) return 1;
+        return window.innerWidth >= 640 ? 2 : 1;
+      }
+
+      function getMaxScrollIndex() {
+        return Math.max(0, totalSlidesCount - getVisibleSlidesCount());
+      }
+
+      function navigateToSlide(index) {
+        currentSlideIndex = Math.max(0, Math.min(index, getMaxScrollIndex()));
+        const translationPercentage = currentSlideIndex * (100 / getVisibleSlidesCount());
+        trackElement.style.transform = `translateX(-${translationPercentage}%)`;
+
+        prevButton.disabled = (currentSlideIndex === 0);
+        nextButton.disabled = (currentSlideIndex >= getMaxScrollIndex());
+
+        const dots = dotsWrapper.querySelectorAll('.slider-dot');
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle('is-active', dotIndex === currentSlideIndex);
+        });
+      }
+
+      prevButton.addEventListener('click', () => navigateToSlide(currentSlideIndex - 1));
+      nextButton.addEventListener('click', () => navigateToSlide(currentSlideIndex + 1));
+
+      window.addEventListener('resize', () => {
+        navigateToSlide(currentSlideIndex);
+      });
+
+      navigateToSlide(0);
+    }
+
+    // ── LIGHTBOX GRAPHICS CONTAINER ──
+    const lightboxElement = document.getElementById('js-lightbox');
+    const lightboxImageElement = document.getElementById('js-lb-img');
+
+    function openLightbox(imageSource) {
+      if (!imageSource) return;
+      lightboxImageElement.src = imageSource;
+      lightboxElement.classList.add('is-open');
+      document.body.classList.add('is-fixed');
+    }
+
+    function closeLightbox() {
+      lightboxElement.classList.remove('is-open');
+      document.body.classList.remove('is-fixed');
+    }
+
+    document.querySelectorAll('[data-lb-trigger]').forEach(triggerElement => {
+      triggerElement.addEventListener('click', () => {
+        const embeddedImage = triggerElement.querySelector('img');
+        if (embeddedImage && embeddedImage.src) openLightbox(embeddedImage.src);
+      });
+    });
+
+    document.getElementById('js-lb-close').addEventListener('click', closeLightbox);
+    lightboxElement.addEventListener('click', (event) => {
+      if (event.target === lightboxElement) closeLightbox();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeLightbox();
+    });
+
+    // ── CLIPBOARD TOAST SYSTEM ──
+    const toastNotification = document.getElementById('js-toast');
+    let toastTimeoutId;
+
+    document.querySelectorAll('.js-copy').forEach(copyButton => {
+      copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyButton.dataset.copy).then(() => {
+          clearTimeout(toastTimeoutId);
+          toastNotification.classList.add('is-show');
+          toastTimeoutId = setTimeout(() => toastNotification.classList.remove('is-show'), 2000);
+        });
+      });
+    });
+
+    // ── INITIALIZE COMPONENTS ON DOM LOAD ──
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.slider-container').forEach(container => {
+        initializeSlider(container);
+      });
+    });
+  </script>
 </body>
+
 </html>
